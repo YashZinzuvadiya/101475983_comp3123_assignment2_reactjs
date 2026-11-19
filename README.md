@@ -6,7 +6,7 @@ A secure MERN app. Users sign up, log in (JWT) and manage **their own** employee
 
 **Stack:** MongoDB + Mongoose, Express, React (Vite), Node.
 Backend: JWT, bcryptjs, Helmet, express-rate-limit, express-validator, Multer, CORS, file logging, `/health`.
-Frontend: React 19, react-router-dom, Axios, **TanStack Query** (server state) and **TanStack Table** (sorting), custom CSS.
+Frontend: React 19, react-router-dom, Axios, **Bootstrap 5** (UI), **TanStack Query** (server state) and **TanStack Table** (sorting).
 Database: `comp3123_assignment2` (only the backend connects to MongoDB).
 
 ## Run with Docker Compose
@@ -64,6 +64,10 @@ Errors always look like `{ "status": "error", "message": "...", "errors": [...]?
 - **Errors in the UI:** `errorMessage()` converts Axios errors to readable text (validation lists, network down, 429 with retry time). Forms show inline errors plus a banner. A global response interceptor handles **401** on any non-login call: it clears the token and cache, redirects to `/login` with "session expired". **429** shows "Too many requests…" using the `Retry-After` header. 403/404 on an employee page show a clear message.
 - **Rate limits:** login/signup 10 per 15 min per IP, other API calls 300 per 15 min (configurable via env).
 
+## Screenshots
+
+`screenshots/` holds one image per feature (signup, login/logout, list, add with validation and picture, edit, search by department/position, sort, delete, 401 and 429 handling), plus `101475983_COMP3123_Assignment2_Screenshots.pdf` with captions for the D2L submission.
+
 ## Structure
 
 ```
@@ -74,4 +78,4 @@ frontend/  src/{api,context,components,pages} Dockerfile nginx.conf
 
 ## AI usage
 
-Generative AI was used to help build this project; see the AI Usage Declaration submitted on D2L.
+Please review the AI Usage Declaration submitted on D2L.
