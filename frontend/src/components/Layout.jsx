@@ -9,7 +9,7 @@ export default function Layout() {
         <div className="container">
           <Link to="/employees" className="navbar-brand fw-bold">Employee Manager</Link>
           <div className="d-flex align-items-center gap-3">
-            <span className="text-light-emphasis">{user?.username}</span>
+            <span className="text-light">{user?.username}</span>
             <button className="btn btn-outline-light btn-sm" onClick={() => logout()}>Log out</button>
           </div>
         </div>

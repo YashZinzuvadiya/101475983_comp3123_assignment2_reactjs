@@ -50,7 +50,11 @@ export default function EmployeeForm() {
     onError: (err) => setError(errorMessage(err)),
   });
 
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  // Editing a field clears its own error straight away
+  const set = (k) => (e) => {
+    setForm({ ...form, [k]: e.target.value });
+    setErrors((p) => ({ ...p, [k]: undefined }));
+  };
 
   const onFile = (e) => {
     const f = e.target.files[0];

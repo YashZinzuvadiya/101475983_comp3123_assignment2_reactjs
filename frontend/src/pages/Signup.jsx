@@ -22,7 +22,10 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  const set = (k) => (e) => {
+    setForm({ ...form, [k]: e.target.value });
+    setErrors((p) => ({ ...p, [k]: undefined }));
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
