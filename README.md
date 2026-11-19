@@ -77,7 +77,3 @@ docker-compose.yml
 backend/   config/ controllers/ middleware/ models/ routes/ utils/ validators/ uploads/ logs/ Dockerfile
 frontend/  src/{api,context,components,pages} Dockerfile nginx.conf
 ```
-
-## AI usage
-
-Please review the AI Usage Declaration submitted on D2L.
