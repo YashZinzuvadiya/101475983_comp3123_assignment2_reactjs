@@ -66,7 +66,9 @@ Errors always look like `{ "status": "error", "message": "...", "errors": [...]?
 
 ## Screenshots
 
-`screenshots/` holds one image per feature (signup, login/logout, list, add with validation and picture, edit, search by department/position, sort, delete, 401 and 429 handling), plus `101475983_COMP3123_Assignment2_Screenshots.pdf` with captions for the D2L submission.
+`screenshots/` holds one image per feature of the React app (signup, login/logout, list, add with validation and picture, edit, search by department/position, sort, delete, 401 and 429 handling), `screenshots/postman/` the REST API tests, and two MongoDB Compass captures. `101475983_COMP3123_Assignment2_Screenshots.pdf` combines them with captions for the D2L submission.
+
+The Postman collection is in `postman/COMP3123_Assignment2.postman_collection.json` (import it, then run the requests in order; it stores the username, JWT and employee id as collection variables and has `pm.test` assertions).
 
 ## Structure
 
