@@ -71,21 +71,22 @@ export default function EmployeeForm() {
     save.mutate();
   };
 
-  if (editing && existing.isLoading) return <p className="empty">Loading…</p>;
-  if (editing && existing.error) return <p className="alert alert-error">{errorMessage(existing.error)}</p>;
+  if (editing && existing.isLoading) return <p className="text-center text-secondary py-5">Loading…</p>;
+  if (editing && existing.error) return <p className="alert alert-danger">{errorMessage(existing.error)}</p>;
 
   const field = (k, label, props = {}) => (
-    <label>{label}
-      <input value={form[k]} onChange={set(k)} {...props} />
-      {errors[k] && <span className="field-error">{errors[k]}</span>}
-    </label>
+    <div className="col-md-6">
+      <label className="form-label" htmlFor={k}>{label}</label>
+      <input id={k} className={`form-control ${errors[k] ? 'is-invalid' : ''}`} value={form[k]} onChange={set(k)} {...props} />
+      {errors[k] && <div className="invalid-feedback">{errors[k]}</div>}
+    </div>
   );
 
   return (
     <>
-      <div className="page-head"><h1>{editing ? 'Edit employee' : 'Add employee'}</h1></div>
-      <form className="card form-grid" onSubmit={onSubmit} noValidate>
-        {error && <p className="alert alert-error full" role="alert">{error}</p>}
+      <h1 className="h3 mb-3">{editing ? 'Edit employee' : 'Add employee'}</h1>
+      <form className="card shadow-sm p-4 row g-3 mx-0" onSubmit={onSubmit} noValidate>
+        {error && <p className="alert alert-danger col-12" role="alert">{error}</p>}
         {field('first_name', 'First name')}
         {field('last_name', 'Last name')}
         {field('email', 'Email', { type: 'email' })}
@@ -93,15 +94,14 @@ export default function EmployeeForm() {
         {field('department', 'Department')}
         {field('salary', 'Salary (CAD)', { type: 'number', min: '0', step: '0.01' })}
         {field('date_of_joining', 'Date of joining', { type: 'date' })}
-        <label>Profile picture (optional, max 2 MB)
-          <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={onFile} />
-          {errors.picture && <span className="field-error">{errors.picture}</span>}
-        </label>
-        <div className="actions full">
+        <div className="col-md-6"><label className="form-label" htmlFor="picture">Profile picture (optional, max 2 MB)</label>
+          <input id="picture" className={`form-control ${errors.picture ? 'is-invalid' : ''}`} type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={onFile} />
+          {errors.picture && <div className="invalid-feedback">{errors.picture}</div>}</div>
+        <div className="col-12 d-flex gap-2">
           <button className="btn btn-primary" disabled={save.isPending || !!errors.picture}>
             {save.isPending ? 'Saving…' : editing ? 'Save changes' : 'Create employee'}
           </button>
-          <Link to={editing ? `/employees/${id}` : '/employees'} className="btn btn-ghost">Cancel</Link>
+          <Link to={editing ? `/employees/${id}` : '/employees'} className="btn btn-outline-secondary">Cancel</Link>
         </div>
       </form>
     </>

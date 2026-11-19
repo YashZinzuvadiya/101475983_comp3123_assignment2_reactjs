@@ -43,23 +43,20 @@ export default function Signup() {
 
   return (
     <div className="auth-page">
-      <form className="card auth-card" onSubmit={onSubmit} noValidate>
-        <h1>Create account</h1>
-        {error && <p className="alert alert-error" role="alert">{error}</p>}
-        <label>Username
-          <input value={form.username} onChange={set('username')} autoComplete="username" autoFocus />
-          {errors.username && <span className="field-error">{errors.username}</span>}
-        </label>
-        <label>Email
-          <input type="email" value={form.email} onChange={set('email')} autoComplete="email" />
-          {errors.email && <span className="field-error">{errors.email}</span>}
-        </label>
-        <label>Password
-          <input type="password" value={form.password} onChange={set('password')} autoComplete="new-password" />
-          {errors.password && <span className="field-error">{errors.password}</span>}
-        </label>
-        <button className="btn btn-primary" disabled={busy}>{busy ? 'Creating…' : 'Sign up'}</button>
-        <p className="muted">Already registered? <Link to="/login">Log in</Link></p>
+      <form className="card shadow-sm auth-card p-4" onSubmit={onSubmit} noValidate>
+        <h1 className="h3 mb-3">Create account</h1>
+        {error && <p className="alert alert-danger" role="alert">{error}</p>}
+        <div className="mb-3"><label className="form-label" htmlFor="username">Username</label>
+          <input id="username" className={`form-control ${errors.username ? 'is-invalid' : ''}`} value={form.username} onChange={set('username')} autoComplete="username" autoFocus />
+          {errors.username && <div className="invalid-feedback">{errors.username}</div>}</div>
+        <div className="mb-3"><label className="form-label" htmlFor="email">Email</label>
+          <input id="email" className={`form-control ${errors.email ? 'is-invalid' : ''}`} type="email" value={form.email} onChange={set('email')} autoComplete="email" />
+          {errors.email && <div className="invalid-feedback">{errors.email}</div>}</div>
+        <div className="mb-3"><label className="form-label" htmlFor="password">Password</label>
+          <input id="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} type="password" value={form.password} onChange={set('password')} autoComplete="new-password" />
+          {errors.password && <div className="invalid-feedback">{errors.password}</div>}</div>
+        <button className="btn btn-primary w-100" disabled={busy}>{busy ? 'Creating…' : 'Sign up'}</button>
+        <p className="text-secondary mt-3 mb-0 text-center">Already registered? <Link to="/login">Log in</Link></p>
       </form>
     </div>
   );

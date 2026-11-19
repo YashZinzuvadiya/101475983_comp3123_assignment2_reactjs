@@ -5,14 +5,16 @@ export default function Layout() {
   const { user, logout } = useAuth();
   return (
     <>
-      <header className="topbar">
-        <Link to="/employees" className="brand">Employee Manager</Link>
-        <div className="topbar-right">
-          <span className="muted">{user?.username}</span>
-          <button className="btn btn-ghost" onClick={() => logout()}>Log out</button>
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container">
+          <Link to="/employees" className="navbar-brand fw-bold">Employee Manager</Link>
+          <div className="d-flex align-items-center gap-3">
+            <span className="text-light-emphasis">{user?.username}</span>
+            <button className="btn btn-outline-light btn-sm" onClick={() => logout()}>Log out</button>
+          </div>
         </div>
-      </header>
-      <main className="container">
+      </nav>
+      <main className="container py-4">
         <Outlet />
       </main>
     </>

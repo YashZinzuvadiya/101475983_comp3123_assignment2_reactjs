@@ -29,19 +29,17 @@ export default function Login() {
 
   return (
     <div className="auth-page">
-      <form className="card auth-card" onSubmit={onSubmit} noValidate>
-        <h1>Log in</h1>
-        {location.state?.registered && <p className="alert alert-ok">Account created. Please log in.</p>}
-        {sessionNotice && <p className="alert alert-warn">{sessionNotice}</p>}
-        {error && <p className="alert alert-error" role="alert">{error}</p>}
-        <label>Username or email
-          <input value={form.identifier} onChange={(e) => setForm({ ...form, identifier: e.target.value })} autoComplete="username" autoFocus />
-        </label>
-        <label>Password
-          <input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} autoComplete="current-password" />
-        </label>
-        <button className="btn btn-primary" disabled={busy}>{busy ? 'Logging in…' : 'Log in'}</button>
-        <p className="muted">No account? <Link to="/signup">Sign up</Link></p>
+      <form className="card shadow-sm auth-card p-4" onSubmit={onSubmit} noValidate>
+        <h1 className="h3 mb-3">Log in</h1>
+        {location.state?.registered && <p className="alert alert-success">Account created. Please log in.</p>}
+        {sessionNotice && <p className="alert alert-warning">{sessionNotice}</p>}
+        {error && <p className="alert alert-danger" role="alert">{error}</p>}
+        <div className="mb-3"><label className="form-label" htmlFor="identifier">Username or email</label>
+          <input id="identifier" className="form-control" value={form.identifier} onChange={(e) => setForm({ ...form, identifier: e.target.value })} autoComplete="username" autoFocus /></div>
+        <div className="mb-3"><label className="form-label" htmlFor="password">Password</label>
+          <input id="password" className="form-control" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} autoComplete="current-password" /></div>
+        <button className="btn btn-primary w-100" disabled={busy}>{busy ? 'Logging in…' : 'Log in'}</button>
+        <p className="text-secondary mt-3 mb-0 text-center">No account? <Link to="/signup">Sign up</Link></p>
       </form>
     </div>
   );

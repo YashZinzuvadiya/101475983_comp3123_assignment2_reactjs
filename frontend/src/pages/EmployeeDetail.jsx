@@ -42,13 +42,13 @@ export default function EmployeeDetail() {
     upload.mutate(f);
   };
 
-  if (isLoading) return <p className="empty">Loading…</p>;
+  if (isLoading) return <p className="text-center text-secondary py-5">Loading…</p>;
   if (loadError) {
     const status = loadError.response?.status;
     return (
       <>
-        <p className="alert alert-error">{status === 403 ? 'You do not have access to this employee.' : status === 404 ? 'Employee not found.' : errorMessage(loadError)}</p>
-        <Link to="/employees" className="btn btn-ghost">← Back to list</Link>
+        <p className="alert alert-danger">{status === 403 ? 'You do not have access to this employee.' : status === 404 ? 'Employee not found.' : errorMessage(loadError)}</p>
+        <Link to="/employees" className="btn btn-outline-secondary">← Back to list</Link>
       </>
     );
   }
@@ -63,24 +63,22 @@ export default function EmployeeDetail() {
 
   return (
     <>
-      <div className="page-head">
-        <Link to="/employees" className="muted">← All employees</Link>
-      </div>
-      {error && <p className="alert alert-error" role="alert">{error}</p>}
-      <div className="card detail">
+      <div className="mb-3"><Link to="/employees" className="text-decoration-none">← All employees</Link></div>
+      {error && <p className="alert alert-danger" role="alert">{error}</p>}
+      <div className="card shadow-sm p-4 detail">
         <div className="detail-photo">
           <Avatar employee={emp} size={140} />
-          <label className="btn btn-ghost">
+          <label className="btn btn-outline-secondary btn-sm">
             {upload.isPending ? 'Uploading…' : emp.profile_picture ? 'Change picture' : 'Upload picture'}
             <input type="file" hidden accept="image/jpeg,image/png,image/webp,image/gif" onChange={onFile} disabled={upload.isPending} />
           </label>
         </div>
         <div className="detail-info">
-          <h1>{emp.first_name} {emp.last_name}</h1>
-          <dl>
-            {rows.map(([k, v]) => (<div key={k}><dt>{k}</dt><dd>{v}</dd></div>))}
+          <h1 className="h3">{emp.first_name} {emp.last_name}</h1>
+          <dl className="my-3">
+            {rows.map(([k, v]) => (<div key={k} className="d-flex border-bottom py-2"><dt className="text-secondary fw-normal" style={{ width: 140 }}>{k}</dt><dd className="mb-0 fw-medium">{v}</dd></div>))}
           </dl>
-          <div className="actions">
+          <div className="d-flex gap-2">
             <Link to={`/employees/${id}/edit`} className="btn btn-primary">Edit</Link>
             <button
               className="btn btn-danger"

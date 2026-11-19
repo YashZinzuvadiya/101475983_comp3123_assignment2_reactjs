@@ -69,34 +69,35 @@ export default function EmployeeList() {
 
   return (
     <>
-      <div className="page-head">
-        <h1>Employees</h1>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h1 className="h3 mb-0">Employees</h1>
         <Link to="/employees/new" className="btn btn-primary">+ Add employee</Link>
       </div>
 
-      <div className="card filters">
-        <input placeholder="Search name or email…" value={filters.q} onChange={set('q')} aria-label="Search name or email" />
-        <input placeholder="Department" value={filters.department} onChange={set('department')} aria-label="Department" />
-        <input placeholder="Position" value={filters.position} onChange={set('position')} aria-label="Position" />
+      <div className="card shadow-sm p-3 mb-3"><div className="row g-2">
+        <div className="col-md-6"><input className="form-control" placeholder="Search name or email…" value={filters.q} onChange={set('q')} aria-label="Search name or email" /></div>
+        <div className="col-md-3"><input className="form-control" placeholder="Department" value={filters.department} onChange={set('department')} aria-label="Department" /></div>
+        <div className="col-md-3"><input className="form-control" placeholder="Position" value={filters.position} onChange={set('position')} aria-label="Position" /></div>
+      </div>
         {hasFilters && (
-          <button className="btn btn-ghost" onClick={() => setFilters({ q: '', department: '', position: '' })}>Clear</button>
+          <div className="mt-2"><button className="btn btn-outline-secondary btn-sm" onClick={() => setFilters({ q: '', department: '', position: '' })}>Clear filters</button></div>
         )}
       </div>
 
-      {error && <p className="alert alert-error" role="alert">{errorMessage(error)}</p>}
+      {error && <p className="alert alert-danger" role="alert">{errorMessage(error)}</p>}
 
-      <div className="card table-wrap" style={{ opacity: isFetching && !isLoading ? 0.6 : 1 }}>
+      <div className="card shadow-sm table-responsive" style={{ opacity: isFetching && !isLoading ? 0.6 : 1 }}>
         {isLoading ? (
-          <p className="empty">Loading…</p>
+          <p className="text-center text-secondary py-5 mb-0">Loading…</p>
         ) : data.length === 0 ? (
-          <p className="empty">{hasFilters ? 'No employees match your search.' : 'No employees yet. Add your first one!'}</p>
+          <p className="text-center text-secondary py-5 mb-0">{hasFilters ? 'No employees match your search.' : 'No employees yet. Add your first one!'}</p>
         ) : (
-          <table>
-            <thead>
+          <table className="table table-hover align-middle mb-0">
+            <thead className="table-light">
               {table.getHeaderGroups().map((hg) => (
                 <tr key={hg.id}>
                   {hg.headers.map((h) => (
-                    <th key={h.id} onClick={h.column.getToggleSortingHandler()} className="sortable">
+                    <th key={h.id} onClick={h.column.getToggleSortingHandler()} role="button">
                       {flexRender(h.column.columnDef.header, h.getContext())}
                       {{ asc: ' ▲', desc: ' ▼' }[h.column.getIsSorted()] ?? ''}
                     </th>
@@ -116,7 +117,7 @@ export default function EmployeeList() {
           </table>
         )}
       </div>
-      <p className="muted small">{data.length} employee{data.length === 1 ? '' : 's'} · click a column header to sort</p>
+      <p className="text-secondary small mt-2">{data.length} employee{data.length === 1 ? '' : 's'} · click a column header to sort</p>
     </>
   );
 }
